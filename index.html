@@ -282,12 +282,24 @@
     @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
     .hero-img-placeholder {
-      width: 200px; height: 200px; border-radius: 50%;
+      width: 280px; height: 280px; border-radius: 50%;
+      overflow: hidden; position: relative;
       background: linear-gradient(135deg, var(--blue), var(--blue-mid));
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: white;
-      letter-spacing: -.02em;
+      box-shadow:
+        inset 0 0 0 4px rgba(255,255,255,.9),
+        inset 0 0 0 5px var(--blue),
+        0 20px 60px -10px rgba(0,48,135,.35);
+      transition: transform .6s var(--ease);
     }
+    .hero-img-placeholder img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 20%;
+      display: block;
+      filter: saturate(1.05) contrast(1.02);
+      transition: transform .8s var(--ease), filter .6s var(--ease);
+    }
+    .hero-img-bg:hover .hero-img-placeholder img { transform: scale(1.06); filter: saturate(1.15) contrast(1.05); }
+    .hero-img-bg:hover .hero-img-placeholder { transform: scale(1.02); }
 
     .hero-img-badge {
       position: absolute; bottom: 20px; right: -10px;
@@ -654,7 +666,7 @@
       section { padding: 5rem 0; }
       .hero-img-wrap { margin-top: 3rem; }
       .hero-img-bg { width: 240px; height: 240px; }
-      .hero-img-placeholder { width: 150px; height: 150px; font-size: 3rem; }
+      .hero-img-placeholder { width: 200px; height: 200px; }
       .scroll-hint { display: none; }
       body { cursor: auto; }
       #cursor, #cursor-ring { display: none; }
@@ -731,7 +743,9 @@
 
       <div class="col-lg-5 hero-img-wrap fade-up delay-2">
         <div class="hero-img-bg">
-          <div class="hero-img-placeholder">MK</div>
+              <div class="hero-img-placeholder">
+                <img src="me.jpg" alt="Nguyen Minh Khoa portrait" loading="eager" decoding="async" />
+              </div>
         </div>
         <div class="hero-img-badge">
           <span class="badge-dot"></span>

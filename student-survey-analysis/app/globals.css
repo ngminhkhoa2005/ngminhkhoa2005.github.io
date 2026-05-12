@@ -1,0 +1,202 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Color system — HCMUT (Bach Khoa) inspired modern palette.
+  Brand primary: deep HCMUT navy blue.
+  Accent: warm signal red/orange (the warm tone in HCMUT identity).
+  Neutrals: cool off-white, slate, deep ink.
+  Total: 5 colors (bg, fg, muted, navy, warm-red).
+*/
+
+:root {
+  --background: oklch(0.985 0.003 240);
+  --foreground: oklch(0.16 0.03 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.16 0.03 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.16 0.03 250);
+
+  /* HCMUT deep navy blue */
+  --primary: oklch(0.42 0.16 252);
+  --primary-foreground: oklch(0.98 0 0);
+
+  --secondary: oklch(0.95 0.012 245);
+  --secondary-foreground: oklch(0.22 0.04 250);
+
+  --muted: oklch(0.95 0.012 245);
+  --muted-foreground: oklch(0.5 0.02 250);
+
+  /* warm signal red (HCMUT accent) */
+  --accent: oklch(0.62 0.2 28);
+  --accent-foreground: oklch(0.98 0 0);
+
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.9 0.012 245);
+  --input: oklch(0.9 0.012 245);
+  --ring: oklch(0.42 0.16 252);
+
+  --chart-1: oklch(0.5 0.18 252); /* HCMUT navy */
+  --chart-2: oklch(0.65 0.2 30); /* signal red */
+  --chart-3: oklch(0.55 0.04 250); /* slate */
+  --chart-4: oklch(0.78 0.12 80); /* warm amber */
+  --chart-5: oklch(0.35 0.12 252); /* deep navy */
+
+  --radius: 0.75rem;
+}
+
+.dark {
+  /* deep navy-ink background — feels like HCMUT signage at night */
+  --background: oklch(0.16 0.035 252);
+  --foreground: oklch(0.97 0.008 80);
+  --card: oklch(0.21 0.04 252);
+  --card-foreground: oklch(0.97 0.008 80);
+  --popover: oklch(0.21 0.04 252);
+  --popover-foreground: oklch(0.97 0.008 80);
+
+  /* bright HCMUT blue against dark */
+  --primary: oklch(0.7 0.16 245);
+  --primary-foreground: oklch(0.12 0.03 252);
+
+  --secondary: oklch(0.25 0.045 252);
+  --secondary-foreground: oklch(0.97 0.008 80);
+
+  --muted: oklch(0.25 0.045 252);
+  --muted-foreground: oklch(0.7 0.02 250);
+
+  /* warm coral-red accent */
+  --accent: oklch(0.7 0.18 32);
+  --accent-foreground: oklch(0.12 0 0);
+
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.3 0.045 252);
+  --input: oklch(0.3 0.045 252);
+  --ring: oklch(0.7 0.16 245);
+
+  --chart-1: oklch(0.72 0.16 245); /* HCMUT blue */
+  --chart-2: oklch(0.72 0.18 32); /* warm coral */
+  --chart-3: oklch(0.58 0.04 250); /* slate */
+  --chart-4: oklch(0.82 0.12 80); /* amber */
+  --chart-5: oklch(0.5 0.14 240); /* deep navy mid */
+}
+
+@theme inline {
+  --font-sans: var(--font-sans), 'Inter', system-ui, sans-serif;
+  --font-serif: var(--font-serif), 'Instrument Serif', Georgia, serif;
+  --font-mono: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 12px);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  ::selection {
+    background-color: oklch(0.7 0.16 245 / 0.4);
+    color: var(--foreground);
+  }
+}
+
+/* Cinematic utilities */
+.font-serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.text-display {
+  font-feature-settings: "ss01", "cv11";
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.glass {
+  background: color-mix(in oklch, var(--card) 60%, transparent);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid color-mix(in oklch, var(--border) 80%, transparent);
+}
+
+.divider-line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklch, var(--border) 100%, transparent) 50%,
+    transparent
+  );
+  height: 1px;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
